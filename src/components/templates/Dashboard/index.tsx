@@ -1,23 +1,16 @@
 import Columns from "~/components/organisms/Columns";
 import * as S from "./styles";
 import { SearchBar } from "~/components/molecules/SearchBar";
-import { useHistory } from "react-router-dom";
-import routes from "~/router/routes";
+import { DashboardProps } from "./types";
 
-const Dashboard = () => {
-  const history = useHistory();
-
-  const goToNewAdmissionPage = () => {
-    history.push(routes.newUser);
-  };
+const Dashboard = ({
+	searchBarProps,
+	columnsProps
+}: DashboardProps) => {
   return (
     <S.Container>
-      <SearchBar textFieldProps={{
-        placeholder: "Digite um CPF válido"
-      }}
-      buttonText="Nova Admissão"
-      onSubmit={() => goToNewAdmissionPage()}/>
-      <Columns registrations={[]} />
+      <SearchBar {...searchBarProps} />
+      <Columns {...columnsProps} />
     </S.Container>
   );
 };
