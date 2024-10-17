@@ -1,13 +1,8 @@
-import Collumns from "./components/Columns";
-import * as S from "./styles";
-import { SearchBar } from "./components/Searchbar";
+import Dashboard from "~/components/templates/Dashboard";
 
 const DashboardPage = () => {
   return (
-    <S.Container>
-      <SearchBar />
-      <Collumns registrations={[]} />
-    </S.Container>
+    <Dashboard />
   );
 };
 export default DashboardPage;

@@ -1,4 +1,4 @@
-import { ButtonSmall } from "~/components/Buttons";
+import { ButtonSmall } from "~/components/atoms/Buttons";
 import * as S from "./styles";
 import {
   HiOutlineMail,
@@ -6,12 +6,9 @@ import {
   HiOutlineCalendar,
   HiOutlineTrash,
 } from "react-icons/hi";
+import * as T from "./types";
 
-type Props = {
-  data: any;
-};
-
-const RegistrationCard = (props: Props) => {
+const RegistrationCard = (props: T.RegistrationCardProps) => {
   return (
     <S.Card>
       <S.IconAndText>

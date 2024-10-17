@@ -1,6 +1,7 @@
 
 import * as S from "./styles";
-import RegistrationCard from "../RegistrationCard";
+import * as T from './types'
+import RegistrationCard from "~/components/molecules/RegistrationCard";
 
 const allColumns = [
   { status: 'REVIEW', title: "Pronto para revisar" },
@@ -8,20 +9,17 @@ const allColumns = [
   { status: 'REPROVED', title: "Reprovado" },
 ];
 
-type Props = {
-  registrations?: any[];
-};
-const Collumns = (props: Props) => {
+const Columns = (props: T.ColumnsProps) => {
   return (
     <S.Container>
-      {allColumns.map((collum) => {
+      {allColumns.map((colum) => {
         return (
-          <S.Column status={collum.status} key={collum.title}>
+          <S.Column status={colum.status} key={colum.title}>
             <>
-              <S.TitleColumn status={collum.status}>
-                {collum.title}
+              <S.TitleColumn status={colum.status}>
+                {colum.title}
               </S.TitleColumn>
-              <S.CollumContent>
+              <S.ColumContent>
                 {props?.registrations?.map((registration) => {
                   return (
                     <RegistrationCard
@@ -30,7 +28,7 @@ const Collumns = (props: Props) => {
                     />
                   );
                 })}
-              </S.CollumContent>
+              </S.ColumContent>
             </>
           </S.Column>
         );
@@ -38,4 +36,4 @@ const Collumns = (props: Props) => {
     </S.Container>
   );
 };
-export default Collumns;
+export default Columns;

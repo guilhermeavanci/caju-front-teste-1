@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as T from './types'
 
 export const _IconButtonStyled = styled.button`
   cursor: pointer;
@@ -15,11 +16,7 @@ export const _IconButtonStyled = styled.button`
   }
 `;
 
-type IconButtonProps = {
-  children?: React.ReactNode;
-} & React.HTMLAttributes<HTMLButtonElement>;
-
-export const IconButton = (props: IconButtonProps) => {
+export const IconButton = (props: T.IconButtonProps) => {
   return (
     <_IconButtonStyled {...props}>
       {props.children}

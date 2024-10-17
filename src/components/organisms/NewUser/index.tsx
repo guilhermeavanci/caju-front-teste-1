@@ -1,8 +1,8 @@
-import TextField from "~/components/TextField";
+import TextField from "~/components/atoms/TextField";
 import * as S from "./styles";
-import Button from "~/components/Buttons";
+import Button from "~/components/atoms/Buttons";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import { IconButton } from "~/components/Buttons/IconButton";
+import { IconButton } from "~/components/atoms/Buttons/IconButton";
 import { useHistory } from "react-router-dom";
 import routes from "~/router/routes";
 
