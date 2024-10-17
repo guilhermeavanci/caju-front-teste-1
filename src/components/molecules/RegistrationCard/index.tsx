@@ -1,12 +1,7 @@
-import { ButtonSmall } from "~/components/atoms/Buttons";
-import * as S from "./styles";
-import {
-  HiOutlineMail,
-  HiOutlineUser,
-  HiOutlineCalendar,
-  HiOutlineTrash,
-} from "react-icons/hi";
-import * as T from "./types";
+import { ButtonSmall } from '~/components/atoms/Buttons'
+import * as S from './styles'
+import { HiOutlineMail, HiOutlineUser, HiOutlineCalendar, HiOutlineTrash } from 'react-icons/hi'
+import * as T from './types'
 
 const RegistrationCard = (props: T.RegistrationCardProps) => {
   return (
@@ -24,14 +19,14 @@ const RegistrationCard = (props: T.RegistrationCardProps) => {
         <span>{props.data.admissionDate}</span>
       </S.IconAndText>
       <S.Actions>
-        <ButtonSmall bgcolor="rgb(255, 145, 154)" >Reprovar</ButtonSmall>
-        <ButtonSmall bgcolor="rgb(155, 229, 155)">Aprovar</ButtonSmall>
-        <ButtonSmall bgcolor="#ff8858">Revisar novamente</ButtonSmall>
+        <ButtonSmall bgcolor='rgb(255, 145, 154)'>Reprovar</ButtonSmall>
+        <ButtonSmall bgcolor='rgb(155, 229, 155)'>Aprovar</ButtonSmall>
+        <ButtonSmall bgcolor='#ff8858'>Revisar novamente</ButtonSmall>
 
         <HiOutlineTrash />
       </S.Actions>
     </S.Card>
-  );
-};
+  )
+}
 
-export default RegistrationCard;
+export default RegistrationCard

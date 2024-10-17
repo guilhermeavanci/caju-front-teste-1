@@ -1,5 +1,4 @@
 export type RegistrationCardProps = {
-	// TODO: improve type here
-	data: any;
-  };
-
+  // TODO: improve type here
+  data: any
+}

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 import * as T from './types'
 
 export const _IconButtonStyled = styled.button`
@@ -14,12 +14,8 @@ export const _IconButtonStyled = styled.button`
   svg {
     color: #64a98c;
   }
-`;
+`
 
 export const IconButton = (props: T.IconButtonProps) => {
-  return (
-    <_IconButtonStyled {...props}>
-      {props.children}
-    </_IconButtonStyled>
-  );
-};
+  return <_IconButtonStyled {...props}>{props.children}</_IconButtonStyled>
+}
