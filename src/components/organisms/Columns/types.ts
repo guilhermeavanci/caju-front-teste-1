@@ -2,6 +2,7 @@ export type ColumnsProps = {
   columns: ColumnsConfig
 }
 
+// TODO: since it's a core entity, we must move it out of here and maybe turn it into a model
 export type Registration = {
   admissionDate: string
   email: string
