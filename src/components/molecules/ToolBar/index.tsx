@@ -15,7 +15,7 @@ export const ToolBar = ({ textFieldProps, newRegistrationButton, dataUpdatedAt, 
           {isGreaterThan('md') ? 'Última atualização: ' : null}
           {isGreaterThan('sm') ? dataUpdatedAt : null}
         </S.DataUpdatedAt>
-        <ButtonOutlined aria-label='refetch' onClick={() => onClickRefresh()}>
+        <ButtonOutlined $rounded aria-label='refetch' onClick={() => onClickRefresh()}>
           <HiRefresh />
         </ButtonOutlined>
         <Button onClick={() => newRegistrationButton.onClick()}>{newRegistrationButton.text}</Button>
