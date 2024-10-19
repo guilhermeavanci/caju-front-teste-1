@@ -1,13 +1,13 @@
 import Columns from '~/components/organisms/Columns'
 import * as S from './styles'
-import { SearchBar } from '~/components/molecules/SearchBar'
+import { ToolBar } from '~/components/molecules/ToolBar'
 import { DashboardProps } from './types'
 import Toast from '~/components/atoms/Toast'
 
-const Dashboard = ({ searchBarProps, columnsProps }: DashboardProps) => {
+const Dashboard = ({ toolBarProps, columnsProps }: DashboardProps) => {
   return (
     <S.Container>
-      <SearchBar {...searchBarProps} />
+      <ToolBar {...toolBarProps} />
       <Columns {...columnsProps} />
       <Toast />
     </S.Container>

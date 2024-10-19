@@ -172,7 +172,7 @@ const DashboardPage = () => {
   return (
     <>
       <Dashboard
-        searchBarProps={{
+        toolBarProps={{
           textFieldProps: {
             placeholder: 'Digite um CPF válido'
           },

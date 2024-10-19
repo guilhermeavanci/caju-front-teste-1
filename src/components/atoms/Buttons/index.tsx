@@ -4,16 +4,21 @@ import { Color, COLORS } from '~/theme'
 const defaultShadow = `rgba(149, 157, 165, 0.2) 0px 8px 24px`
 const hoverShadow = `0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)`
 
-const Button = styled.button<{
+type ButtonStyle = {
   $color?: Color
+  disabled?: boolean
   $preventAnimation?: boolean
-}>`
+  $rounded?: boolean
+}
+
+const Button = styled.button<ButtonStyle>`
+  line-height: 0px;
   outline: none;
   display: flex;
   align-items: center;
   border: none;
-  border-radius: 36px;
-  padding: 8px 32px;
+  border-radius: ${({ $rounded }) => ($rounded ? '100%' : '36px')};
+  padding: ${({ $rounded }) => ($rounded ? '8px 16px' : '8px 32px')};
   height: 56px;
   box-shadow: ${defaultShadow};
   font-size: 16px;
@@ -23,6 +28,10 @@ const Button = styled.button<{
   cursor: pointer;
   -webkit-transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
   transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
+
+  svg {
+    font-size: 24px;
+  }
 
   &:hover:enabled {
     box-shadow: ${hoverShadow};
@@ -38,19 +47,16 @@ const Button = styled.button<{
   }
 `
 
-export const ButtonOutlined = styled.button<{
-  $color?: Color
-  disabled?: boolean
-  $preventAnimation?: boolean
-}>`
+export const ButtonOutlined = styled.button<ButtonStyle>`
+  line-height: 0px;
   display: flex;
   align-items: center;
   border: none;
-  border-radius: 36px;
-  padding: 8px 32px;
+  border-radius: ${({ $rounded }) => ($rounded ? '100%' : '36px')};
+  padding: ${({ $rounded }) => ($rounded ? '8px 16px' : '8px 32px')};
+  height: 56px;
   outline-style: solid;
   outline-width: 2px;
-  height: 56px;
   box-shadow: ${defaultShadow};
   font-size: 16px;
   font-weight: 600;
@@ -60,6 +66,10 @@ export const ButtonOutlined = styled.button<{
   cursor: pointer;
   -webkit-transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
   transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
+
+  svg {
+    font-size: 24px;
+  }
 
   &:hover:enabled {
     background-color: ${({ $color }) => ($color ? COLORS[`${$color}_LIGHT`] : COLORS.PRIMARY_LIGHT)};
@@ -75,21 +85,23 @@ export const ButtonOutlined = styled.button<{
   }
 `
 
-export const ButtonSmall = styled.button<{
-  $color?: Color
-  disabled?: boolean
-  $preventAnimation?: boolean
-}>`
+export const ButtonSmall = styled.button<ButtonStyle>`
+  line-height: 0px;
   font-size: 12px;
+  font-weight: 600;
   outline: none;
-  border-radius: 4px;
   border: none;
-  padding: 8px 16px;
+  border-radius: ${({ $rounded }) => ($rounded ? '100%' : '4px')};
+  padding: ${({ $rounded }) => ($rounded ? '8px' : '8px 16px')};
   background-color: ${({ $color }) => ($color ? COLORS[$color] : COLORS.PRIMARY)};
   color: ${({ $color }) => ($color ? COLORS[`${$color}_CONTENT`] : COLORS.PRIMARY_CONTENT)};
   cursor: pointer;
   -webkit-transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
   transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
+
+  svg {
+    font-size: 18px;
+  }
 
   &:hover:enabled {
     box-shadow: ${hoverShadow};
@@ -105,23 +117,25 @@ export const ButtonSmall = styled.button<{
   }
 `
 
-export const ButtonSmallOutlined = styled.button<{
-  $color?: Color
-  disabled?: boolean
-  $preventAnimation?: boolean
-}>`
+export const ButtonSmallOutlined = styled.button<ButtonStyle>`
+  line-height: 0px;
   font-size: 12px;
-  border-radius: 4px;
+  font-weight: 600;
   border: none;
-  padding: 8px 16px;
+  border-radius: ${({ $rounded }) => ($rounded ? '100%' : '4px')};
+  padding: ${({ $rounded }) => ($rounded ? '8px' : '8px 16px')};
   background-color: #fff;
   color: ${({ $color }) => ($color ? COLORS[$color] : COLORS.PRIMARY)};
   outline-color: ${({ $color }) => ($color ? COLORS[$color] : COLORS.PRIMARY)};
   outline-style: solid;
-  outline-width: 1px;
+  outline-width: 2px;
   cursor: pointer;
   -webkit-transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
   transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
+
+  svg {
+    font-size: 18px;
+  }
 
   &:hover:enabled {
     background-color: ${({ $color }) => ($color ? COLORS[`${$color}_LIGHT`] : COLORS.PRIMARY_LIGHT)};
@@ -136,5 +150,7 @@ export const ButtonSmallOutlined = styled.button<{
     }
   }
 `
+
+export type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & ButtonStyle
 
 export default Button

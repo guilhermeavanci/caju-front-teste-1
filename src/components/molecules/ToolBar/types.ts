@@ -1,9 +1,9 @@
-import { IconButtonProps } from '~/components/atoms/Buttons/types'
+import { ButtonProps } from '~/components/atoms/Buttons'
 import { TextFieldProps } from '~/components/atoms/TextField/types'
 
-export type SearchBarProps = {
+export type ToolBarProps = {
   textFieldProps?: TextFieldProps
-  iconButtonProps?: IconButtonProps
+  iconButtonProps?: ButtonProps
   buttonText: string
   onSubmit: () => void
 }

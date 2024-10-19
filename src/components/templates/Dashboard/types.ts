@@ -1,7 +1,7 @@
-import { SearchBarProps } from '~/components/molecules/SearchBar/types'
+import { ToolBarProps } from '~/components/molecules/ToolBar/types'
 import { ColumnsProps } from '~/components/organisms/Columns/types'
 
 export type DashboardProps = {
-  searchBarProps: SearchBarProps
+  toolBarProps: ToolBarProps
   columnsProps: ColumnsProps
 }

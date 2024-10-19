@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { _IconButtonStyled } from '~/components/atoms/Buttons/IconButton'
-import Button from '~/components/atoms/Buttons'
+import Button, { ButtonSmallOutlined } from '~/components/atoms/Buttons'
 
 export const Container = styled.div`
   display: flex;
@@ -18,7 +17,8 @@ export const Card = styled.div`
   flex-direction: column;
   gap: 16px;
 
-  ${_IconButtonStyled} {
+  ${ButtonSmallOutlined} {
+    width: min-content;
     margin-bottom: 8px;
     align-items: flex-start;
   }
