@@ -12,7 +12,7 @@ type ButtonStyle = {
 }
 
 const Button = styled.button<ButtonStyle>`
-  line-height: 0px;
+  line-height: ${({ $rounded }) => ($rounded ? '0' : 'normal')};
   outline: none;
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@ const Button = styled.button<ButtonStyle>`
 `
 
 export const ButtonOutlined = styled.button<ButtonStyle>`
-  line-height: 0px;
+  line-height: ${({ $rounded }) => ($rounded ? '0' : 'normal')};
   display: flex;
   align-items: center;
   border: none;
@@ -86,7 +86,7 @@ export const ButtonOutlined = styled.button<ButtonStyle>`
 `
 
 export const ButtonSmall = styled.button<ButtonStyle>`
-  line-height: 0px;
+  line-height: ${({ $rounded }) => ($rounded ? '0' : 'normal')};
   font-size: 12px;
   font-weight: 600;
   outline: none;
@@ -118,7 +118,7 @@ export const ButtonSmall = styled.button<ButtonStyle>`
 `
 
 export const ButtonSmallOutlined = styled.button<ButtonStyle>`
-  line-height: 0px;
+  line-height: ${({ $rounded }) => ($rounded ? '0' : 'normal')};
   font-size: 12px;
   font-weight: 600;
   border: none;
