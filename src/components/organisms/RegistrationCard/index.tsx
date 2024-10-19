@@ -1,24 +1,25 @@
-import { ButtonSmall, ButtonSmallOutlined } from '~/components/atoms/Buttons'
+import { ButtonSmallOutlined } from '~/components/atoms/Buttons'
 import * as S from './styles'
-import {
-  HiOutlineMail,
-  HiOutlineUser,
-  HiOutlineCalendar,
-  HiOutlineTrash,
-  HiOutlineThumbDown,
-  HiOutlineThumbUp,
-  HiDocumentText
-} from 'react-icons/hi'
+import { HiOutlineMail, HiOutlineUser, HiOutlineCalendar, HiOutlineTrash } from 'react-icons/hi'
 import * as T from './types'
 import { COLORS } from '~/theme'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import ApproveButton from '~/components/molecules/ApproveButton'
+import RejectButton from '~/components/molecules/RejectButton'
+import ReviewButton from '~/components/molecules/ReviewButton'
 import { useBreakpoint } from '~/hooks/useBreakpoint'
 import { useMemo } from 'react'
 
 const RegistrationCard = ({ registration, onClickApprove, onClickReject, onClickReview }: T.RegistrationCardProps) => {
   const { isLessOrEqualTo } = useBreakpoint()
-  const smallMode = useMemo(() => isLessOrEqualTo('md'), [isLessOrEqualTo])
+  const buttonsType = useMemo(() => (isLessOrEqualTo('md') ? 'icon' : 'default'), [isLessOrEqualTo])
+  const showApproveButton = useMemo(() => registration.status === 'REVIEW', [registration.status])
+  const showRejectButton = useMemo(() => registration.status === 'REVIEW', [registration.status])
+  const showReviewButton = useMemo(
+    () => registration.status === 'REJECTED' || registration.status === 'APPROVED',
+    [registration.status]
+  )
   return (
     <S.Card>
       {registration.isLoading && (
@@ -50,42 +51,40 @@ const RegistrationCard = ({ registration, onClickApprove, onClickReject, onClick
         <span>{registration.admissionDate}</span>
       </S.IconAndText>
       <S.Actions>
-        <ButtonSmall
-          style={{
-            flex: 1
-          }}
-          aria-disabled={registration.isLoading}
-          disabled={registration.isLoading}
-          $backgroundColor={COLORS.REJECTED}
-          $color={COLORS.REJECTED_CONTENT}
-          onClick={() => onClickReject(registration.id)}>
-          {smallMode ? <HiOutlineThumbDown size={18} /> : 'Reprovar'}
-        </ButtonSmall>
-        <ButtonSmall
-          style={{
-            flex: 1
-          }}
-          aria-disabled={registration.isLoading}
-          disabled={registration.isLoading}
-          $backgroundColor={COLORS.APPROVED}
-          $color={COLORS.APPROVED_CONTENT}
-          onClick={() => onClickApprove(registration.id)}>
-          {smallMode ? <HiOutlineThumbUp size={18} /> : 'Aprovar'}
-        </ButtonSmall>
-        <ButtonSmall
-          style={{
-            flex: 1
-          }}
-          aria-disabled={registration.isLoading}
-          disabled={registration.isLoading}
-          $backgroundColor={COLORS.REVIEW}
-          $color={COLORS.REVIEW_CONTENT}
-          onClick={() => onClickReview(registration.id)}>
-          {smallMode ? <HiDocumentText size={18} /> : 'Revisar novamente'}
-        </ButtonSmall>
+        {showReviewButton && (
+          <ReviewButton
+            style={{
+              width: '25%'
+            }}
+            mode={buttonsType}
+            registration={registration}
+            onClick={onClickReview}
+          />
+        )}
+        {showApproveButton && (
+          <ApproveButton
+            style={{
+              width: '25%'
+            }}
+            mode={buttonsType}
+            registration={registration}
+            onClick={onClickApprove}
+          />
+        )}
+        {showRejectButton && (
+          <RejectButton
+            style={{
+              width: '25%'
+            }}
+            mode={buttonsType}
+            registration={registration}
+            onClick={onClickReject}
+          />
+        )}
         <ButtonSmallOutlined
           style={{
-            flex: 1
+            width: '25%',
+            marginLeft: 'auto'
           }}
           aria-disabled={registration.isLoading}
           disabled={registration.isLoading}

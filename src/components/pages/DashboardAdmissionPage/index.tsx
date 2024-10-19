@@ -30,9 +30,7 @@ const DashboardPage = () => {
 
   const history = useHistory()
 
-  const goToNewAdmissionPage = () => {
-    history.push(routes.newUser)
-  }
+  const goToNewAdmissionPage = () => history.push(routes.newUser)
 
   const [modalState, setModalState] = useState<ModalState>()
 

@@ -16,6 +16,10 @@ export type Registration = {
   id: string
 }
 
+export type LoadableRegistration = Registration & {
+  isLoading?: boolean
+}
+
 export type EditableRegistration = Partial<Omit<Registration, 'id'>>
 
 export type ColumnStatus = 'REVIEW' | 'APPROVED' | 'REJECTED'
@@ -33,9 +37,7 @@ export type ColumnsConfig = {
       color: string
     }
     registrations?: {
-      [key in string]: Registration & {
-        isLoading?: boolean
-      }
+      [key in string]: LoadableRegistration
     }
   }
 }

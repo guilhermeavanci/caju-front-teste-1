@@ -2,7 +2,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import * as S from './styles'
 import * as T from './types'
-import RegistrationCard from '~/components/molecules/RegistrationCard'
+import RegistrationCard from '~/components/organisms/RegistrationCard'
 
 const Columns = ({ isLoading, columns, onClickApprove, onClickReject, onClickReview }: T.ColumnsProps) => {
   return (

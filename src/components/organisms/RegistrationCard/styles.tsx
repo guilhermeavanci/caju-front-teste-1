@@ -32,7 +32,7 @@ export const IconAndText = styled.div`
 export const Actions = styled.div`
   margin-top: 8px;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: stretch;
   gap: 4px;
 
