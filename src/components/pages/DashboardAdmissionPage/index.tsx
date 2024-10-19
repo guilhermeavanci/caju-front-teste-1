@@ -50,7 +50,7 @@ const DashboardPage = () => {
 
   const history = useHistory()
 
-  const goToNewAdmissionPage = () => history.push(routes.newUser)
+  const goToNewRegistrationPage = () => history.push(routes.newUser)
 
   const [modalState, setModalState] = useState<ModalState>()
 
@@ -176,8 +176,9 @@ const DashboardPage = () => {
           textFieldProps: {
             placeholder: 'Digite um CPF válido'
           },
-          buttonText: 'Nova Admissão',
-          onSubmit: () => goToNewAdmissionPage()
+          dataUpdatedAt: new Date(getRegistrations.dataUpdatedAt).toLocaleTimeString(),
+          newRegistrationButton: { text: 'Nova Admissão', onClick: () => goToNewRegistrationPage() },
+          onClickRefresh: () => getRegistrations.refetch()
         }}
         columnsProps={{
           isLoading: getRegistrations.isPending,
