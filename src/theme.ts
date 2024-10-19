@@ -1,4 +1,22 @@
-export const COLORS = {
+// export type Color = 'PRIMARY' | 'ERROR' | 'APPROVED' | 'REJECTED' | 'REVIEW'
+
+export enum Color {
+  PRIMARY = 'PRIMARY',
+  ERROR = 'ERROR',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+  REVIEW = 'REVIEW'
+}
+
+type LightColorSuffix = '_LIGHT'
+
+type ContentColorSuffix = '_CONTENT'
+
+type ColorPalette = {
+  [key in Color as key | `${key}${LightColorSuffix}` | `${key}${ContentColorSuffix}`]: string
+}
+
+export const COLORS: ColorPalette = {
   PRIMARY: '#00E0C2',
   PRIMARY_LIGHT: '#edfffd',
   PRIMARY_CONTENT: '#004c42',

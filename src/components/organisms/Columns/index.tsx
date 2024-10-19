@@ -4,7 +4,14 @@ import * as S from './styles'
 import * as T from './types'
 import RegistrationCard from '~/components/organisms/RegistrationCard'
 
-const Columns = ({ isLoading, columns, onClickApprove, onClickReject, onClickReview }: T.ColumnsProps) => {
+const Columns = ({
+  isLoading,
+  columns,
+  onClickApprove,
+  onClickReject,
+  onClickReview,
+  onClickDelete
+}: T.ColumnsProps) => {
   return (
     <S.Container>
       {Object.values(columns).map(column => {
@@ -36,6 +43,7 @@ const Columns = ({ isLoading, columns, onClickApprove, onClickReject, onClickRev
                         onClickApprove={onClickApprove}
                         onClickReject={onClickReject}
                         onClickReview={onClickReview}
+                        onClickDelete={onClickDelete}
                       />
                     )
                   })}

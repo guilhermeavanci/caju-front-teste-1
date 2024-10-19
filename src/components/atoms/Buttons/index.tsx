@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import { COLORS } from '~/theme'
+import { Color, COLORS } from '~/theme'
 
 const defaultShadow = `rgba(149, 157, 165, 0.2) 0px 8px 24px`
 const hoverShadow = `0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)`
 
 const Button = styled.button<{
-  $backgroundColor?: string
-  $color?: string
+  $color?: Color
+  $preventAnimation?: boolean
 }>`
   outline: none;
   display: flex;
@@ -18,11 +18,11 @@ const Button = styled.button<{
   box-shadow: ${defaultShadow};
   font-size: 16px;
   font-weight: 600;
-  background-color: ${({ $backgroundColor }) => $backgroundColor || COLORS.PRIMARY};
-  color: ${({ $color }) => $color || COLORS.PRIMARY_CONTENT};
+  background-color: ${({ $color }) => ($color ? COLORS[$color] : COLORS.PRIMARY)};
+  color: ${({ $color }) => ($color ? COLORS[`${$color}_CONTENT`] : COLORS.PRIMARY_CONTENT)};
   cursor: pointer;
-  -webkit-transition-duration: 0.2s;
-  transition-duration: 0.2s;
+  -webkit-transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
+  transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
 
   &:hover:enabled {
     box-shadow: ${hoverShadow};
@@ -39,9 +39,9 @@ const Button = styled.button<{
 `
 
 export const ButtonOutlined = styled.button<{
-  $color?: string
-  $hoverBackgroundColor?: string
+  $color?: Color
   disabled?: boolean
+  $preventAnimation?: boolean
 }>`
   display: flex;
   align-items: center;
@@ -55,14 +55,14 @@ export const ButtonOutlined = styled.button<{
   font-size: 16px;
   font-weight: 600;
   background-color: #fff;
-  color: ${({ $color }) => $color || COLORS.PRIMARY};
-  outline-color: ${({ $color }) => $color || COLORS.PRIMARY};
+  color: ${({ $color }) => ($color ? COLORS[$color] : COLORS.PRIMARY)};
+  outline-color: ${({ $color }) => ($color ? COLORS[$color] : COLORS.PRIMARY)};
   cursor: pointer;
-  -webkit-transition-duration: 0.2s;
-  transition-duration: 0.2s;
+  -webkit-transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
+  transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
 
   &:hover:enabled {
-    background-color: ${({ $hoverBackgroundColor }) => $hoverBackgroundColor || COLORS.PRIMARY_LIGHT};
+    background-color: ${({ $color }) => ($color ? COLORS[`${$color}_LIGHT`] : COLORS.PRIMARY_LIGHT)};
   }
 
   &[aria-disabled='true'] {
@@ -76,20 +76,20 @@ export const ButtonOutlined = styled.button<{
 `
 
 export const ButtonSmall = styled.button<{
-  $backgroundColor?: string
-  $color?: string
+  $color?: Color
   disabled?: boolean
+  $preventAnimation?: boolean
 }>`
   font-size: 12px;
   outline: none;
   border-radius: 4px;
   border: none;
   padding: 8px 16px;
-  background-color: ${({ $backgroundColor }) => $backgroundColor || COLORS.PRIMARY};
-  color: ${({ $color }) => $color || COLORS.PRIMARY_CONTENT};
+  background-color: ${({ $color }) => ($color ? COLORS[$color] : COLORS.PRIMARY)};
+  color: ${({ $color }) => ($color ? COLORS[`${$color}_CONTENT`] : COLORS.PRIMARY_CONTENT)};
   cursor: pointer;
-  -webkit-transition-duration: 0.2s;
-  transition-duration: 0.2s;
+  -webkit-transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
+  transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
 
   &:hover:enabled {
     box-shadow: ${hoverShadow};
@@ -106,25 +106,25 @@ export const ButtonSmall = styled.button<{
 `
 
 export const ButtonSmallOutlined = styled.button<{
-  $color?: string
-  $hoverBackgroundColor?: string
+  $color?: Color
   disabled?: boolean
+  $preventAnimation?: boolean
 }>`
   font-size: 12px;
   border-radius: 4px;
   border: none;
   padding: 8px 16px;
   background-color: #fff;
-  color: ${({ $color }) => $color || COLORS.PRIMARY};
-  outline-color: ${({ $color }) => $color || COLORS.PRIMARY};
+  color: ${({ $color }) => ($color ? COLORS[$color] : COLORS.PRIMARY)};
+  outline-color: ${({ $color }) => ($color ? COLORS[$color] : COLORS.PRIMARY)};
   outline-style: solid;
   outline-width: 1px;
   cursor: pointer;
-  -webkit-transition-duration: 0.2s;
-  transition-duration: 0.2s;
+  -webkit-transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
+  transition-duration: ${({ $preventAnimation }) => ($preventAnimation ? '0s' : '0.2s')};
 
   &:hover:enabled {
-    background-color: ${({ $hoverBackgroundColor }) => $hoverBackgroundColor || COLORS.PRIMARY_LIGHT};
+    background-color: ${({ $color }) => ($color ? COLORS[`${$color}_LIGHT`] : COLORS.PRIMARY_LIGHT)};
   }
 
   &[aria-disabled='true'] {

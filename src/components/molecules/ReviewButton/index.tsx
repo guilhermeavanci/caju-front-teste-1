@@ -1,7 +1,7 @@
 import { ButtonSmall } from '~/components/atoms/Buttons'
 import { HiDocumentText } from 'react-icons/hi'
 import * as T from './types'
-import { COLORS } from '~/theme'
+import { Color } from '~/theme'
 
 const ReviewButton = ({ mode, registration, onClick, ...props }: T.ReviewButtonProps) => {
   return (
@@ -9,8 +9,7 @@ const ReviewButton = ({ mode, registration, onClick, ...props }: T.ReviewButtonP
       {...props}
       aria-disabled={registration.isLoading}
       disabled={registration.isLoading}
-      $backgroundColor={COLORS.REVIEW}
-      $color={COLORS.REVIEW_CONTENT}
+      $color={Color.REVIEW}
       onClick={() => onClick(registration.id)}>
       {mode === 'default' ? 'Revisar novamente' : <HiDocumentText size={18} />}
     </ButtonSmall>

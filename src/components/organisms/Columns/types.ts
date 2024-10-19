@@ -4,6 +4,7 @@ export type ColumnsProps = {
   onClickApprove: (registrationId: Registration['id']) => void
   onClickReject: (registrationId: Registration['id']) => void
   onClickReview: (registrationId: Registration['id']) => void
+  onClickDelete: (registrationId: Registration['id']) => void
 }
 
 // TODO: since it's a core entity, we must move it out of here and maybe turn it into a model

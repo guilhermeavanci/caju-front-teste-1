@@ -16,4 +16,11 @@ export class RegistrationApiDataSource implements DataSource {
     })
     return res.json()
   }
+
+  async deleteRegistrations({ id }: { id: string }): Promise<Registration[]> {
+    const res = await fetch(`${import.meta.env.VITE_REGISTRATION_API_HOSTNAME}/registrations/${id}`, {
+      method: 'DELETE'
+    })
+    return res.json()
+  }
 }

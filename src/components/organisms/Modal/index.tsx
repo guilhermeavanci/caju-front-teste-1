@@ -1,17 +1,22 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Button, { ButtonOutlined } from '~/components/atoms/Buttons'
 import { ModalAction, ModalBackdrop, ModalBox, ModalDialog, ModalForm } from './styles'
 import { ModalProps } from './types'
 
-const Modal = ({ id, title, description, open, onConfirm, onCancel }: ModalProps) => {
+const Modal = ({ id, title, description, open, color, onConfirm, onCancel }: ModalProps) => {
   const ref = useRef<HTMLDialogElement>(null)
+
+  // Prevents colors from flicking based on previous opened modal content
+  const [preventAnimation, setPreventAnimation] = useState(false)
 
   useEffect(() => {
     if (!ref.current) return
     if (open) {
       ref.current.showModal()
+      setTimeout(() => setPreventAnimation(false), 200)
     } else {
       ref.current.close()
+      setPreventAnimation(true)
     }
   }, [open])
 
@@ -27,24 +32,25 @@ const Modal = ({ id, title, description, open, onConfirm, onCancel }: ModalProps
     <ModalDialog
       ref={ref}
       id={id}
-      className='modal'
       onCancel={e => {
         e.preventDefault()
         handleClose()
       }}>
-      <ModalBox className='modal-box'>
+      <ModalBox>
         <h3 className='font-bold text-lg'>{title}</h3>
         <p className='py-4'>{description}</p>
-        <ModalAction className='modal-action'>
+        <ModalAction>
           <ModalForm method='dialog' onSubmit={handleConfirm}>
-            <ButtonOutlined type='button' onClick={handleClose}>
+            <ButtonOutlined $preventAnimation={preventAnimation} $color={color} type='button' onClick={handleClose}>
               Cancelar
             </ButtonOutlined>
-            <Button type='submit'>Confirmar</Button>
+            <Button $preventAnimation={preventAnimation} $color={color} type='submit'>
+              Confirmar
+            </Button>
           </ModalForm>
         </ModalAction>
       </ModalBox>
-      <ModalBackdrop className='modal-backdrop' htmlFor={id} onClick={handleClose}>
+      <ModalBackdrop htmlFor={id} onClick={handleClose}>
         Cancelar
       </ModalBackdrop>
     </ModalDialog>
