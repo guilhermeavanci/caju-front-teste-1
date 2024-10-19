@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
 export const Card = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 4px;
-  border: 4px solid #fff;
   margin: 16px;
   border-radius: 8px;
-  padding: 16px;
+  padding: 20px;
   background-color: #fff;
   h3,
   p {
@@ -22,13 +22,18 @@ export const IconAndText = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+
+  &[aria-disabled='true'] {
+    opacity: 0.5;
+    cursor: auto;
+  }
 `
 
 export const Actions = styled.div`
   margin-top: 8px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   gap: 4px;
 
   svg {

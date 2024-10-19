@@ -1,25 +1,26 @@
 import { ColumnsConfig } from '~/components/organisms/Columns/types'
+import { COLORS } from '~/theme'
 
 export const COLUMNS: ColumnsConfig = {
   REVIEW: {
     title: 'Pronto para revisar',
     style: {
-      backgroundColor: '#FDF8E9',
-      color: '#EFC24D'
+      backgroundColor: COLORS.REVIEW_LIGHT,
+      color: COLORS.REVIEW
     }
   },
   APPROVED: {
     title: 'Aprovado',
     style: {
-      backgroundColor: '#EEEEFD',
-      color: '#4242DF'
+      backgroundColor: COLORS.APPROVED_LIGHT,
+      color: COLORS.APPROVED
     }
   },
   REJECTED: {
     title: 'Reprovado',
     style: {
-      backgroundColor: '#FBEDF6',
-      color: '#CE2893'
+      backgroundColor: COLORS.REJECTED_LIGHT,
+      color: COLORS.REJECTED
     }
   }
 }

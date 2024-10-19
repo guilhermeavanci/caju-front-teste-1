@@ -1,8 +1,10 @@
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import * as S from './styles'
 import * as T from './types'
 import RegistrationCard from '~/components/molecules/RegistrationCard'
 
-const Columns = ({ columns }: T.ColumnsProps) => {
+const Columns = ({ isLoading, columns, onClickApprove, onClickReject, onClickReview }: T.ColumnsProps) => {
   return (
     <S.Container>
       {Object.values(columns).map(column => {
@@ -12,9 +14,30 @@ const Columns = ({ columns }: T.ColumnsProps) => {
             <>
               <S.TitleColumn $color={color}>{column.title}</S.TitleColumn>
               <S.ColumContent>
+                {isLoading && (
+                  <div style={{ padding: '0 16px 0' }}>
+                    <Skeleton
+                      count={3}
+                      height={150}
+                      style={{
+                        margin: '10px 0 10px'
+                      }}
+                      baseColor={'#fff'}
+                      highlightColor={backgroundColor}
+                    />
+                  </div>
+                )}
                 {column.registrations &&
                   Object.values(column.registrations).map(registration => {
-                    return <RegistrationCard data={registration} key={registration.id} />
+                    return (
+                      <RegistrationCard
+                        registration={registration}
+                        key={registration.id}
+                        onClickApprove={onClickApprove}
+                        onClickReject={onClickReject}
+                        onClickReview={onClickReview}
+                      />
+                    )
                   })}
               </S.ColumContent>
             </>

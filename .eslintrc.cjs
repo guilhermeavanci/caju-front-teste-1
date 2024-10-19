@@ -9,6 +9,11 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:@tanstack/query/recommended'
   ],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    project: ['./tsconfig.json'],
+    sourceType: 'module'
+  },
   settings: {
     react: {
       version: 'detect'
@@ -28,6 +33,7 @@ module.exports = {
     'react/display-name': 'off',
     '@typescript-eslint/ban-types': 'off',
     'import/named': 'off',
-    'react-hooks/exhaustive-deps': 'warn'
+    'react-hooks/exhaustive-deps': 'warn',
+    '@typescript-eslint/switch-exhaustiveness-check': 'error'
   }
 }
