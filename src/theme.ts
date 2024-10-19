@@ -2,6 +2,9 @@
 
 export enum Color {
   PRIMARY = 'PRIMARY',
+  INFO = 'INFO',
+  SUCCESS = 'SUCCESS',
+  WARNING = 'WARNING',
   ERROR = 'ERROR',
   APPROVED = 'APPROVED',
   REJECTED = 'REJECTED',
@@ -20,7 +23,16 @@ export const COLORS: ColorPalette = {
   PRIMARY: '#00E0C2',
   PRIMARY_LIGHT: '#edfffd',
   PRIMARY_CONTENT: '#004c42',
-  //   Status
+  // Status
+  INFO: '#5820D7',
+  INFO_LIGHT: '#e6dcff',
+  INFO_CONTENT: '#fff',
+  SUCCESS: '#64a98c',
+  SUCCESS_LIGHT: '#e8fff5',
+  SUCCESS_CONTENT: '#000',
+  WARNING: '#FFC42B',
+  WARNING_LIGHT: '#fff6de',
+  WARNING_CONTENT: '#000',
   ERROR: '#e80537',
   ERROR_LIGHT: '#fff1f4',
   ERROR_CONTENT: '#FFF',

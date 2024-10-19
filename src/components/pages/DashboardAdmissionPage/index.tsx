@@ -11,6 +11,7 @@ import { ModalContent, ModalState, RegistrationMap } from './types'
 import { EmployeeNameText } from '~/components/atoms/EmployeeNameText'
 import { RegistrationStatusText } from '~/components/atoms/RegistrationStatusText'
 import { Color } from '~/theme'
+import { toast } from 'react-toastify'
 
 // TODO: move it to a better place
 const registrationApi = new RegistrationApiDataSource()
@@ -24,16 +25,26 @@ const DashboardPage = () => {
   const { mutate: patchRegistrationMutate } = useMutation({
     mutationKey: ['update-registration'],
     mutationFn: registrationApi.patchRegistrations,
+    networkMode: 'always',
     onMutate: variables => setLoadingRegistrationIds(prev => [...prev, variables.id]),
     onSuccess: () => getRegistrations.refetch(),
+    onError: () =>
+      toast.error('Falha ao tentar atualizar admissão', {
+        position: 'bottom-right'
+      }),
     onSettled: () => setLoadingRegistrationIds([])
   })
 
   const { mutate: deleteRegistrationMutate } = useMutation({
     mutationKey: ['delete-registration'],
     mutationFn: registrationApi.deleteRegistrations,
+    networkMode: 'always',
     onMutate: variables => setLoadingRegistrationIds(prev => [...prev, variables.id]),
     onSuccess: () => getRegistrations.refetch(),
+    onError: () =>
+      toast.error('Falha ao tentar remover admissão', {
+        position: 'bottom-right'
+      }),
     onSettled: () => setLoadingRegistrationIds([])
   })
 
