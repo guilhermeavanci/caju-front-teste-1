@@ -65,7 +65,6 @@ const DashboardPage = () => {
       }
     }, COLUMNS)
   }, [getRegistrations.data, loadingRegistrationIds])
-  console.log(columns)
 
   const prevModalContent = useRef<ModalContent>()
   const modalContent = useMemo<ModalContent | undefined>(() => {
