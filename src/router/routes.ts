@@ -1,8 +1,8 @@
-const routes = {
-  identify: '/identify',
-  dashboard: '/dashboard',
-  history: '/history',
-  newRegistration: '/new-registration'
+enum Routes {
+  IDENTIFY = '/identify',
+  DASHBOARD = '/dashboard',
+  HISTORY = '/history',
+  NEW_REGISTRATION = '/new-registration'
 }
 
-export default routes
+export default Routes

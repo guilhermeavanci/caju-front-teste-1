@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom'
-import routes from '~/router/routes'
+import Routes from '~/router/routes'
 import NewRegistrationTemplate from '~/components/templates/NewRegistrationTemplate'
 import { useMutation } from '@tanstack/react-query'
 import { RegistrationApiDataSource } from '~/data-source/RegistrationApiDataSource'
@@ -11,7 +11,7 @@ const registrationApi = new RegistrationApiDataSource()
 const NewRegistrationPage = () => {
   const history = useHistory()
   const goToHome = () => {
-    history.push(routes.dashboard)
+    history.push(Routes.DASHBOARD)
   }
 
   const { mutate: postRegistrationMutate, isPending } = useMutation({

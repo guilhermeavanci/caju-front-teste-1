@@ -1,7 +1,7 @@
 import { ColumnsConfig, Registration } from '~/components/organisms/Columns/types'
 import DashboardTemplate from '~/components/templates/DashboardTemplate'
 import { useHistory } from 'react-router-dom'
-import routes from '~/router/routes'
+import Routes from '~/router/routes'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { COLUMNS } from './constans'
 import { useMutation, useQuery } from '@tanstack/react-query'
@@ -62,7 +62,7 @@ const DashboardPage = () => {
 
   const history = useHistory()
 
-  const goToNewRegistrationPage = () => history.push(routes.newRegistration)
+  const goToNewRegistrationPage = () => history.push(Routes.NEW_REGISTRATION)
 
   const [modalState, setModalState] = useState<ModalState>()
 

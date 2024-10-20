@@ -1,5 +1,5 @@
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom'
-import routes from './routes'
+import Routes from './routes'
 import DashboardAdmissionPage from '~/components/pages/DashboardAdmissionPage'
 import NewRegistrationPage from '~/components/pages/NewRegistrationPage'
 
@@ -8,11 +8,11 @@ const Router = () => {
     <div style={{ marginTop: 64 }}>
       <HashRouter>
         <Switch>
-          <Route exact path={routes.dashboard} component={DashboardAdmissionPage} />
-          <Route exact path={routes.newRegistration} component={NewRegistrationPage} />
-          <Route exact path={routes.history} component={() => <div>History</div>} />
+          <Route exact path={Routes.DASHBOARD} component={DashboardAdmissionPage} />
+          <Route exact path={Routes.NEW_REGISTRATION} component={NewRegistrationPage} />
+          <Route exact path={Routes.HISTORY} component={() => <div>History</div>} />
           <Route exact path='*'>
-            <Redirect to={routes.dashboard} />
+            <Redirect to={Routes.DASHBOARD} />
           </Route>
         </Switch>
       </HashRouter>
