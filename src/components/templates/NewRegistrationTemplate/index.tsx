@@ -1,12 +1,12 @@
 import * as S from './styles'
 import { ButtonSmallOutlined } from '~/components/atoms/Buttons'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
-import { UserFormProps } from './types'
+import * as T from './types'
 import RegistrationForm from '~/components/organisms/RegistrationForm'
 import Skeleton from 'react-loading-skeleton'
 import { COLORS } from '~/theme'
 
-const UserForm = ({ isLoading, onClickBackButton, onSubmit }: UserFormProps) => {
+const NewRegistrationTemplate = ({ isLoading, onClickBackButton, onSubmit }: T.NewRegistrationTemplateProps) => {
   return (
     <>
       <S.Container>
@@ -32,4 +32,4 @@ const UserForm = ({ isLoading, onClickBackButton, onSubmit }: UserFormProps) => 
   )
 }
 
-export default UserForm
+export default NewRegistrationTemplate

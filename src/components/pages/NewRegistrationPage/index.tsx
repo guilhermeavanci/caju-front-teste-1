@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom'
 import routes from '~/router/routes'
-import UserForm from '~/components/templates/UserForm'
+import NewRegistrationTemplate from '~/components/templates/NewRegistrationTemplate'
 import { useMutation } from '@tanstack/react-query'
 import { RegistrationApiDataSource } from '~/data-source/RegistrationApiDataSource'
 import { toast } from 'react-toastify'
@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 // TODO: move it to a better place
 const registrationApi = new RegistrationApiDataSource()
 
-const NewUserPage = () => {
+const NewRegistrationPage = () => {
   const history = useHistory()
   const goToHome = () => {
     history.push(routes.dashboard)
@@ -31,7 +31,7 @@ const NewUserPage = () => {
   })
 
   return (
-    <UserForm
+    <NewRegistrationTemplate
       isLoading={isPending}
       onClickBackButton={goToHome}
       onSubmit={data =>
@@ -47,4 +47,4 @@ const NewUserPage = () => {
   )
 }
 
-export default NewUserPage
+export default NewRegistrationPage

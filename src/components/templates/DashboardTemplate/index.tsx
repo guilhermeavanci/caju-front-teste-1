@@ -1,9 +1,9 @@
 import Columns from '~/components/organisms/Columns'
 import * as S from './styles'
 import { ToolBar } from '~/components/organisms/ToolBar'
-import { DashboardProps } from './types'
+import * as T from './types'
 
-const Dashboard = ({ toolBarProps, columnsProps }: DashboardProps) => {
+const DashboardTemplate = ({ toolBarProps, columnsProps }: T.DashboardTemplateProps) => {
   return (
     <S.Container>
       <ToolBar {...toolBarProps} />
@@ -11,4 +11,4 @@ const Dashboard = ({ toolBarProps, columnsProps }: DashboardProps) => {
     </S.Container>
   )
 }
-export default Dashboard
+export default DashboardTemplate

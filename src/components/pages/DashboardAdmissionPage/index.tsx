@@ -1,5 +1,5 @@
 import { ColumnsConfig, Registration } from '~/components/organisms/Columns/types'
-import Dashboard from '~/components/templates/Dashboard'
+import DashboardTemplate from '~/components/templates/DashboardTemplate'
 import { useHistory } from 'react-router-dom'
 import routes from '~/router/routes'
 import { useCallback, useMemo, useRef, useState } from 'react'
@@ -62,7 +62,7 @@ const DashboardPage = () => {
 
   const history = useHistory()
 
-  const goToNewRegistrationPage = () => history.push(routes.newUser)
+  const goToNewRegistrationPage = () => history.push(routes.newRegistration)
 
   const [modalState, setModalState] = useState<ModalState>()
 
@@ -183,7 +183,7 @@ const DashboardPage = () => {
 
   return (
     <>
-      <Dashboard
+      <DashboardTemplate
         toolBarProps={{
           dataUpdatedAt: new Date(getRegistrations.dataUpdatedAt).toLocaleTimeString(),
           newRegistrationButton: { text: 'Nova Admissão', onClick: () => goToNewRegistrationPage() },
