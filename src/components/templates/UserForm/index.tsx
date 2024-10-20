@@ -11,10 +11,10 @@ const UserForm = ({ confirmButtonText, onClickBackButton, onClickConfirmButton }
         <ButtonSmallOutlined $rounded onClick={() => onClickBackButton()} aria-label='back'>
           <HiOutlineArrowLeft />
         </ButtonSmallOutlined>
-        <TextField placeholder='Nome' label='Nome' />
-        <TextField placeholder='Email' label='Email' type='email' />
-        <TextField placeholder='CPF' label='CPF' />
-        <TextField label='Data de admissão' type='date' />
+        <TextField id='name' placeholder='Nome' label='Nome' />
+        <TextField id='email' type='email' placeholder='Email' label='Email' />
+        <TextField id='cpf' placeholder='CPF' label='CPF' />
+        <TextField id='date' type='date' label='Data de admissão' />
         <Button onClick={() => onClickConfirmButton()}>{confirmButtonText}</Button>
       </S.Card>
     </S.Container>
