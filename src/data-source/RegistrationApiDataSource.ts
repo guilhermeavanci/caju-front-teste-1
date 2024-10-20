@@ -6,7 +6,7 @@ const PATH = `${import.meta.env.VITE_REGISTRATION_API_HOSTNAME}/registrations`
 export class RegistrationApiDataSource implements DataSource {
   constructor() {}
 
-  async postRegistrations({ body }: { body: UnidentifiedRegistration }): Promise<Registration[]> {
+  async postRegistrations({ body }: { body: UnidentifiedRegistration }): Promise<Registration> {
     const res = await fetch(PATH, {
       method: 'POST',
       body: JSON.stringify(body)
@@ -21,7 +21,7 @@ export class RegistrationApiDataSource implements DataSource {
     return res.json()
   }
 
-  async patchRegistrations({ id, body }: { id: string; body: EditableRegistration }): Promise<Registration[]> {
+  async patchRegistrations({ id, body }: { id: string; body: EditableRegistration }): Promise<Registration> {
     const res = await fetch(`${PATH}/${id}`, {
       method: 'PATCH',
       body: JSON.stringify(body)
@@ -29,7 +29,7 @@ export class RegistrationApiDataSource implements DataSource {
     return res.json()
   }
 
-  async deleteRegistrations({ id }: { id: string }): Promise<Registration[]> {
+  async deleteRegistrations({ id }: { id: string }): Promise<Registration> {
     const res = await fetch(`${PATH}/${id}`, {
       method: 'DELETE'
     })
