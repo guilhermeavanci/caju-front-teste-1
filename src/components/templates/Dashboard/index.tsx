@@ -1,6 +1,6 @@
 import Columns from '~/components/organisms/Columns'
 import * as S from './styles'
-import { ToolBar } from '~/components/molecules/ToolBar'
+import { ToolBar } from '~/components/organisms/ToolBar'
 import { DashboardProps } from './types'
 import Toast from '~/components/atoms/Toast'
 

@@ -1,8 +1,7 @@
-import { TextFieldProps } from '~/components/atoms/TextField/types'
-
 export type ToolBarProps = {
-  textFieldProps?: TextFieldProps
   dataUpdatedAt: string
+  onCpfBecomeValid: (cpf: string) => void
+  onCpfBecomeIncompleteOrInvalid: () => void
   onClickRefresh: () => void
   newRegistrationButton: {
     text: string

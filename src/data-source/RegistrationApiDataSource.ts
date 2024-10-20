@@ -4,8 +4,10 @@ import type { DataSource } from './DataSource'
 export class RegistrationApiDataSource implements DataSource {
   constructor() {}
 
-  async getRegistrations(): Promise<Registration[]> {
-    const res = await fetch(`${import.meta.env.VITE_REGISTRATION_API_HOSTNAME}/registrations`)
+  async getRegistrations(cpf?: string): Promise<Registration[]> {
+    const url = new URL(`${import.meta.env.VITE_REGISTRATION_API_HOSTNAME}/registrations`)
+    if (cpf) url.searchParams.set('cpf', cpf)
+    const res = await fetch(url)
     return res.json()
   }
 

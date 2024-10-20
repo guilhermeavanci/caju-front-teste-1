@@ -1,6 +1,6 @@
-import { InputHTMLAttributes } from 'react'
-
 export type TextFieldProps = {
-  label?: string
+  id: string
+  label: string
+  placeholder: string
   error?: string
-} & InputHTMLAttributes<any>
+}

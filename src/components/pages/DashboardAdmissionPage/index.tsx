@@ -17,9 +17,11 @@ import { toast } from 'react-toastify'
 const registrationApi = new RegistrationApiDataSource()
 
 const DashboardPage = () => {
+  const [cpfInputValue, setCpfInputValue] = useState('')
+
   const getRegistrations = useQuery({
-    queryKey: ['get-registrations'],
-    queryFn: registrationApi.getRegistrations
+    queryKey: ['get-registrations', cpfInputValue],
+    queryFn: () => registrationApi.getRegistrations(cpfInputValue)
   })
 
   const { mutate: patchRegistrationMutate } = useMutation({
@@ -173,12 +175,11 @@ const DashboardPage = () => {
     <>
       <Dashboard
         toolBarProps={{
-          textFieldProps: {
-            placeholder: 'Digite um CPF válido'
-          },
           dataUpdatedAt: new Date(getRegistrations.dataUpdatedAt).toLocaleTimeString(),
           newRegistrationButton: { text: 'Nova Admissão', onClick: () => goToNewRegistrationPage() },
-          onClickRefresh: () => getRegistrations.refetch()
+          onClickRefresh: () => getRegistrations.refetch(),
+          onCpfBecomeValid: cpf => setCpfInputValue(cpf),
+          onCpfBecomeIncompleteOrInvalid: () => setCpfInputValue('')
         }}
         columnsProps={{
           isLoading: getRegistrations.isPending,

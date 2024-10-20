@@ -1,4 +1,4 @@
-import { ToolBarProps } from '~/components/molecules/ToolBar/types'
+import { ToolBarProps } from '~/components/organisms/ToolBar/types'
 import { ColumnsProps } from '~/components/organisms/Columns/types'
 
 export type DashboardProps = {
