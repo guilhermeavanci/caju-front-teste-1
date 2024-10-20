@@ -29,9 +29,14 @@ const DashboardPage = () => {
     mutationFn: registrationApi.patchRegistrations,
     networkMode: 'always',
     onMutate: variables => setLoadingRegistrationIds(prev => [...prev, variables.id]),
-    onSuccess: () => getRegistrations.refetch(),
-    onError: () =>
-      toast.error('Falha ao tentar atualizar admissão', {
+    onSuccess: (_, variables) => {
+      toast.success(`Admissão "${dataMap[variables.id].employeeName}" movida com sucesso`, {
+        position: 'bottom-right'
+      })
+      getRegistrations.refetch()
+    },
+    onError: (_, variables) =>
+      toast.error(`Falha ao tentar atualizar admissão "${dataMap[variables.id].employeeName}"`, {
         position: 'bottom-right'
       }),
     onSettled: () => setLoadingRegistrationIds([])
@@ -42,9 +47,14 @@ const DashboardPage = () => {
     mutationFn: registrationApi.deleteRegistrations,
     networkMode: 'always',
     onMutate: variables => setLoadingRegistrationIds(prev => [...prev, variables.id]),
-    onSuccess: () => getRegistrations.refetch(),
-    onError: () =>
-      toast.error('Falha ao tentar remover admissão', {
+    onSuccess: (_, variables) => {
+      toast.success(`Admissão "${dataMap[variables.id].employeeName}" removida com sucesso`, {
+        position: 'bottom-right'
+      })
+      getRegistrations.refetch()
+    },
+    onError: (_, variables) =>
+      toast.error(`Falha ao tentar remover admissão "${dataMap[variables.id].employeeName}"`, {
         position: 'bottom-right'
       }),
     onSettled: () => setLoadingRegistrationIds([])
@@ -178,7 +188,7 @@ const DashboardPage = () => {
           dataUpdatedAt: new Date(getRegistrations.dataUpdatedAt).toLocaleTimeString(),
           newRegistrationButton: { text: 'Nova Admissão', onClick: () => goToNewRegistrationPage() },
           onClickRefresh: () => getRegistrations.refetch(),
-          onCpfBecomeValid: cpf => setCpfInputValue(cpf),
+          onCpfSearchFormSubmit: ({ cpf }) => setCpfInputValue(cpf),
           onCpfBecomeIncompleteOrInvalid: () => setCpfInputValue('')
         }}
         columnsProps={{

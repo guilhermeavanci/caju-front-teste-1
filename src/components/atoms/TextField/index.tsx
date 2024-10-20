@@ -3,11 +3,11 @@ import * as S from './styles'
 
 const TextField = ({ error, ...props }: T.TextFieldProps) => {
   return (
-    <div>
+    <S.Container>
       <label htmlFor={props.id}>{props.label}</label>
       <S.Input {...props} />
       <S.Error>{error}</S.Error>
-    </div>
+    </S.Container>
   )
 }
 

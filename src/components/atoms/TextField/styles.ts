@@ -1,11 +1,15 @@
 import styled from 'styled-components'
 import { COLORS } from '~/theme'
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 export const Input = styled.input`
   padding: 0 8px;
   vertical-align: middle;
   border-radius: 2px;
-  width: 100%;
   min-height: 36px;
   background-color: #ffffff;
   border: 1px solid rgba(36, 28, 21, 0.3);

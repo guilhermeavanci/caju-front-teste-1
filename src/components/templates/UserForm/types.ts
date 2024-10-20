@@ -1,5 +1,7 @@
+import { RegistrationFormSchema } from '~/components/organisms/RegistrationForm/types'
+
 export type UserFormProps = {
-  confirmButtonText: string
+  isLoading?: boolean
   onClickBackButton: () => void
-  onClickConfirmButton: () => void
+  onSubmit: (data: RegistrationFormSchema) => void
 }

@@ -1,6 +1,8 @@
+import { SearchCpfFormSchema } from '../SearchCpfForm/types'
+
 export type ToolBarProps = {
   dataUpdatedAt: string
-  onCpfBecomeValid: (cpf: string) => void
+  onCpfSearchFormSubmit: (data: SearchCpfFormSchema) => void
   onCpfBecomeIncompleteOrInvalid: () => void
   onClickRefresh: () => void
   newRegistrationButton: {

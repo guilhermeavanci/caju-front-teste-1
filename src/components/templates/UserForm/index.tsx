@@ -1,23 +1,34 @@
-import TextField from '~/components/atoms/TextField'
 import * as S from './styles'
-import Button, { ButtonSmallOutlined } from '~/components/atoms/Buttons'
+import { ButtonSmallOutlined } from '~/components/atoms/Buttons'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
 import { UserFormProps } from './types'
+import RegistrationForm from '~/components/organisms/RegistrationForm'
+import Skeleton from 'react-loading-skeleton'
+import { COLORS } from '~/theme'
 
-const UserForm = ({ confirmButtonText, onClickBackButton, onClickConfirmButton }: UserFormProps) => {
+const UserForm = ({ isLoading, onClickBackButton, onSubmit }: UserFormProps) => {
   return (
-    <S.Container>
-      <S.Card>
-        <ButtonSmallOutlined $rounded onClick={() => onClickBackButton()} aria-label='back'>
-          <HiOutlineArrowLeft />
-        </ButtonSmallOutlined>
-        <TextField id='name' placeholder='Nome' label='Nome' />
-        <TextField id='email' type='email' placeholder='Email' label='Email' />
-        <TextField id='cpf' placeholder='CPF' label='CPF' />
-        <TextField id='date' type='date' label='Data de admissão' />
-        <Button onClick={() => onClickConfirmButton()}>{confirmButtonText}</Button>
-      </S.Card>
-    </S.Container>
+    <>
+      <S.Container>
+        <S.Card>
+          {isLoading && (
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 4,
+                right: 4
+              }}>
+              <Skeleton count={1} height={8} baseColor={COLORS.PRIMARY_LIGHT} highlightColor={COLORS.PRIMARY} />
+            </div>
+          )}
+          <ButtonSmallOutlined $rounded onClick={() => onClickBackButton()} aria-label='back'>
+            <HiOutlineArrowLeft />
+          </ButtonSmallOutlined>
+          <RegistrationForm isLoading={isLoading} onSubmit={onSubmit} />
+        </S.Card>
+      </S.Container>
+    </>
   )
 }
 

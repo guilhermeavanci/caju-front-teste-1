@@ -21,7 +21,9 @@ export type LoadableRegistration = Registration & {
   isLoading?: boolean
 }
 
-export type EditableRegistration = Partial<Omit<Registration, 'id'>>
+export type UnidentifiedRegistration = Omit<Registration, 'id'>
+
+export type EditableRegistration = Partial<UnidentifiedRegistration>
 
 export type ColumnStatus = 'REVIEW' | 'APPROVED' | 'REJECTED'
 
