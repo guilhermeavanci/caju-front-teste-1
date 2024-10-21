@@ -1,86 +1,40 @@
-import { ColumnsConfig, Registration } from '~/components/organisms/Columns/types'
+import { ColumnsConfig } from '~/components/organisms/Columns/types'
 import DashboardTemplate from '~/components/templates/DashboardTemplate'
-import { useHistory } from 'react-router-dom'
-import Routes from '~/router/routes'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { COLUMNS } from './constans'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { RegistrationApiDataSource } from '~/data-source/RegistrationApiDataSource'
 import Modal from '~/components/organisms/Modal'
-import { ModalContent, ModalState, RegistrationMap } from './types'
+import * as T from './types'
 import { EmployeeNameText } from '~/components/atoms/EmployeeNameText'
 import { RegistrationStatusText } from '~/components/atoms/RegistrationStatusText'
 import { Color } from '~/theme'
-import { toast } from 'react-toastify'
+import { useDashboardRegistrationPageController } from './controller'
+import { Registration } from '~/domain/models'
 
-// TODO: move it to a better place
-const registrationApi = new RegistrationApiDataSource()
+const DashboardRegistrationPage = ({ repository }: T.DashboardRegistrationPageProps) => {
+  const {
+    goToNewRegistrationPage,
+    setCpf,
+    loadingRegistrationIds,
+    getRegistrationsQuery,
+    moveRegistrationMutation,
+    removeRegistrationMutation
+  } = useDashboardRegistrationPageController(repository)
 
-const DashboardPage = () => {
-  const [cpfInputValue, setCpfInputValue] = useState('')
+  const [modalState, setModalState] = useState<T.ModalState>()
 
-  const getRegistrations = useQuery({
-    queryKey: ['get-registrations', cpfInputValue],
-    queryFn: () => registrationApi.getRegistrations(cpfInputValue)
-  })
-
-  const { mutate: patchRegistrationMutate } = useMutation({
-    mutationKey: ['update-registration'],
-    mutationFn: registrationApi.patchRegistrations,
-    networkMode: 'always',
-    onMutate: variables => setLoadingRegistrationIds(prev => [...prev, variables.id]),
-    onSuccess: (_, variables) => {
-      toast.success(`Admissão "${dataMap[variables.id].employeeName}" movida com sucesso`, {
-        position: 'bottom-right'
-      })
-      getRegistrations.refetch()
-    },
-    onError: (_, variables) =>
-      toast.error(`Falha ao tentar atualizar admissão "${dataMap[variables.id].employeeName}"`, {
-        position: 'bottom-right'
-      }),
-    onSettled: () => setLoadingRegistrationIds([])
-  })
-
-  const { mutate: deleteRegistrationMutate } = useMutation({
-    mutationKey: ['delete-registration'],
-    mutationFn: registrationApi.deleteRegistrations,
-    networkMode: 'always',
-    onMutate: variables => setLoadingRegistrationIds(prev => [...prev, variables.id]),
-    onSuccess: (_, variables) => {
-      toast.success(`Admissão "${dataMap[variables.id].employeeName}" removida com sucesso`, {
-        position: 'bottom-right'
-      })
-      getRegistrations.refetch()
-    },
-    onError: (_, variables) =>
-      toast.error(`Falha ao tentar remover admissão "${dataMap[variables.id].employeeName}"`, {
-        position: 'bottom-right'
-      }),
-    onSettled: () => setLoadingRegistrationIds([])
-  })
-
-  const history = useHistory()
-
-  const goToNewRegistrationPage = () => history.push(Routes.NEW_REGISTRATION)
-
-  const [modalState, setModalState] = useState<ModalState>()
-
-  const [loadingRegistrationIds, setLoadingRegistrationIds] = useState<Registration['id'][]>([])
-
-  const dataMap = useMemo<RegistrationMap>(() => {
-    if (!getRegistrations.data) return {}
-    return getRegistrations.data.reduce((prev, cur) => {
+  const dataMap = useMemo<T.RegistrationMap>(() => {
+    if (!getRegistrationsQuery.data) return {}
+    return getRegistrationsQuery.data.reduce((prev, cur) => {
       return {
         ...prev,
         [cur.id]: cur
       }
     }, {})
-  }, [getRegistrations.data])
+  }, [getRegistrationsQuery.data])
 
   const columns = useMemo(() => {
-    if (!getRegistrations.data) return COLUMNS
-    return getRegistrations.data.reduce<ColumnsConfig>((prev, cur) => {
+    if (!getRegistrationsQuery.data) return COLUMNS
+    return getRegistrationsQuery.data.reduce<ColumnsConfig>((prev, cur) => {
       const columnId = cur.status
       const column = prev[cur.status]
       return {
@@ -94,10 +48,10 @@ const DashboardPage = () => {
         }
       }
     }, COLUMNS)
-  }, [getRegistrations.data, loadingRegistrationIds])
+  }, [getRegistrationsQuery.data, loadingRegistrationIds])
 
-  const prevModalContent = useRef<ModalContent>()
-  const modalContent = useMemo<ModalContent | undefined>(() => {
+  const prevModalContent = useRef<T.ModalContent>()
+  const modalContent = useMemo<T.ModalContent | undefined>(() => {
     if (!modalState) return prevModalContent.current
     const employeeName: Registration['employeeName'] | undefined = dataMap[modalState.id]?.employeeName
 
@@ -163,36 +117,34 @@ const DashboardPage = () => {
     const { id, action } = modalState
 
     if (action === 'DELETE') {
-      deleteRegistrationMutate({ id })
+      removeRegistrationMutation.mutate({ id })
     } else {
-      patchRegistrationMutate({
+      moveRegistrationMutation.mutate({
         id,
-        body: {
-          status: action
-        }
+        toStatus: action
       })
     }
 
     setModalState(undefined)
-  }, [deleteRegistrationMutate, patchRegistrationMutate, modalState])
+  }, [removeRegistrationMutation, moveRegistrationMutation, modalState])
 
-  if (getRegistrations.isError) {
+  if (getRegistrationsQuery.isError) {
     // TODO: create a component for error
-    return <span>Error: {getRegistrations.error.message}</span>
+    return <span>Error: {getRegistrationsQuery.error.message}</span>
   }
 
   return (
     <>
       <DashboardTemplate
         toolBarProps={{
-          dataUpdatedAt: new Date(getRegistrations.dataUpdatedAt).toLocaleTimeString(),
+          dataUpdatedAt: new Date(getRegistrationsQuery.dataUpdatedAt).toLocaleTimeString(),
           newRegistrationButton: { text: 'Nova Admissão', onClick: () => goToNewRegistrationPage() },
-          onClickRefresh: () => getRegistrations.refetch(),
-          onCpfSearchFormSubmit: ({ cpf }) => setCpfInputValue(cpf),
-          onCpfBecomeIncompleteOrInvalid: () => setCpfInputValue('')
+          onClickRefresh: () => getRegistrationsQuery.refetch(),
+          onCpfSearchFormSubmit: ({ cpf }) => setCpf(cpf),
+          onCpfBecomeIncompleteOrInvalid: () => setCpf('')
         }}
         columnsProps={{
-          isLoading: getRegistrations.isPending,
+          isLoading: getRegistrationsQuery.isPending,
           columns,
           onClickApprove: handleApprove,
           onClickReject: handleReject,
@@ -212,4 +164,4 @@ const DashboardPage = () => {
     </>
   )
 }
-export default DashboardPage
+export default DashboardRegistrationPage

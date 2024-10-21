@@ -1,6 +1,6 @@
-import { EditableRegistration, Registration, UnidentifiedRegistration } from '~/components/organisms/Columns/types'
+import { EditableRegistration, Registration, UnidentifiedRegistration } from '~/domain/models'
 
-export interface DataSource {
+export interface IRegistrationDataSource {
   postRegistrations(payload: { body: UnidentifiedRegistration }): Promise<Registration>
   getRegistrations(cpf?: string): Promise<Registration[]>
   patchRegistrations(payload: { id: string; body: EditableRegistration }): Promise<Registration>

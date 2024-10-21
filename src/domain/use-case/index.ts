@@ -1,0 +1,5 @@
+export { moveRegistration } from './MoveRegistration'
+export { createRegistration } from './CreateRegistration'
+export { getAllRegistrations } from './GetAllRegistrations'
+export { getSingleRegistration } from './GetSingleRegistration'
+export { removeRegistration } from './RemoveRegistration'

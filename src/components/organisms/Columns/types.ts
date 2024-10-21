@@ -1,3 +1,5 @@
+import { LoadableRegistration, Registration, RegistrationStatus } from '~/domain/models'
+
 export type ColumnsProps = {
   isLoading?: boolean
   columns: ColumnsConfig
@@ -7,33 +9,8 @@ export type ColumnsProps = {
   onClickDelete: (registrationId: Registration['id']) => void
 }
 
-// TODO: since it's a core entity, we must move it out of here and maybe turn it into a model
-export type Registration = {
-  admissionDate: string
-  email: string
-  employeeName: string
-  status: ColumnStatus
-  cpf: string
-  id: string
-}
-
-export type LoadableRegistration = Registration & {
-  isLoading?: boolean
-}
-
-export type UnidentifiedRegistration = Omit<Registration, 'id'>
-
-export type EditableRegistration = Partial<UnidentifiedRegistration>
-
-export type ColumnStatus = 'REVIEW' | 'APPROVED' | 'REJECTED'
-
-export type ColumnStyle = {
-  backgroundColor: string
-  color: string
-}
-
 export type ColumnsConfig = {
-  [key in ColumnStatus]: {
+  [key in RegistrationStatus]: {
     title: string
     style?: {
       backgroundColor: string

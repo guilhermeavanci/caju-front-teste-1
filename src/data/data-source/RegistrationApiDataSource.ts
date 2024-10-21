@@ -1,9 +1,9 @@
-import { EditableRegistration, Registration, UnidentifiedRegistration } from '~/components/organisms/Columns/types'
-import type { DataSource } from './DataSource'
+import { EditableRegistration, Registration, UnidentifiedRegistration } from '~/domain/models'
+import type { IRegistrationDataSource } from './IRegistrationDataSource'
 
 const PATH = `${import.meta.env.VITE_REGISTRATION_API_HOSTNAME}/registrations`
 
-export class RegistrationApiDataSource implements DataSource {
+export class RegistrationApiDataSource implements IRegistrationDataSource {
   constructor() {}
 
   async postRegistrations({ body }: { body: UnidentifiedRegistration }): Promise<Registration> {

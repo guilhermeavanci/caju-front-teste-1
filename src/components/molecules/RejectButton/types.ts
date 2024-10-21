@@ -1,4 +1,4 @@
-import { LoadableRegistration, Registration } from '~/components/organisms/Columns/types'
+import { LoadableRegistration, Registration } from '~/domain/models'
 
 type HTMLButtonWithoutOnClick = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'>
 
