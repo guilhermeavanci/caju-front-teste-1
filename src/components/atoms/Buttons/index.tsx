@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import { Color, COLORS } from '~/theme'
-
-const defaultShadow = `rgba(149, 157, 165, 0.2) 0px 8px 24px`
-const hoverShadow = `0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)`
+import { DEFAULT_SHADOW, HOVER_SHADOW } from './constants'
 
 type ButtonStyle = {
   $color?: Color
@@ -19,7 +17,7 @@ const Button = styled.button<ButtonStyle>`
   border-radius: ${({ $rounded }) => ($rounded ? '100%' : '36px')};
   padding: ${({ $rounded }) => ($rounded ? '8px 16px' : '8px 32px')};
   height: 56px;
-  box-shadow: ${defaultShadow};
+  box-shadow: ${DEFAULT_SHADOW};
   font-size: 16px;
   font-weight: 600;
   background-color: ${({ $color }) => ($color ? COLORS[$color] : COLORS.PRIMARY)};
@@ -33,7 +31,7 @@ const Button = styled.button<ButtonStyle>`
   }
 
   &:hover:enabled {
-    box-shadow: ${hoverShadow};
+    box-shadow: ${HOVER_SHADOW};
   }
 
   &[aria-disabled='true'] {
@@ -56,7 +54,7 @@ export const ButtonOutlined = styled.button<ButtonStyle>`
   height: 56px;
   outline-style: solid;
   outline-width: 2px;
-  box-shadow: ${defaultShadow};
+  box-shadow: ${DEFAULT_SHADOW};
   font-size: 16px;
   font-weight: 600;
   background-color: #fff;
@@ -103,7 +101,7 @@ export const ButtonSmall = styled.button<ButtonStyle>`
   }
 
   &:hover:enabled {
-    box-shadow: ${hoverShadow};
+    box-shadow: ${HOVER_SHADOW};
   }
 
   &[aria-disabled='true'] {
