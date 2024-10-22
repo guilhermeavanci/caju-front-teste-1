@@ -6,7 +6,7 @@ const TextField = ({ error, ...props }: T.TextFieldProps) => {
     <S.Container>
       <label htmlFor={props.id}>{props.label}</label>
       <S.Input {...props} />
-      <S.Error>{error}</S.Error>
+      <S.Error data-testid={`${props.id}-error`}>{error}</S.Error>
     </S.Container>
   )
 }
