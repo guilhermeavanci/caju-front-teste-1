@@ -2,6 +2,8 @@
 
 export enum Color {
   PRIMARY = 'PRIMARY',
+  SECONDARY = 'SECONDARY',
+  TERTIARY = 'TERTIARY',
   INFO = 'INFO',
   SUCCESS = 'SUCCESS',
   WARNING = 'WARNING',
@@ -23,6 +25,12 @@ export const COLORS: ColorPalette = {
   PRIMARY: '#00E0C2',
   PRIMARY_LIGHT: '#edfffd',
   PRIMARY_CONTENT: '#004c42',
+  SECONDARY: '#FF5E1C',
+  SECONDARY_LIGHT: '#FDF8E9',
+  SECONDARY_CONTENT: '#FFF',
+  TERTIARY: '#e80537',
+  TERTIARY_LIGHT: '#fff1f4',
+  TERTIARY_CONTENT: '#FFF',
   // Status
   INFO: '#5820D7',
   INFO_LIGHT: '#e6dcff',
