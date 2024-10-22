@@ -37,7 +37,9 @@ const Modal = ({ id, title, description, open, color, onConfirm, onCancel }: Mod
         handleClose()
       }}>
       <ModalBox>
-        <h3 className='font-bold text-lg'>{title}</h3>
+        <h3 className='font-bold text-lg' aria-label={title || 'Confirmar ação'}>
+          {title}
+        </h3>
         <p className='py-4'>{description}</p>
         <ModalAction>
           <ModalForm method='dialog' onSubmit={handleConfirm}>

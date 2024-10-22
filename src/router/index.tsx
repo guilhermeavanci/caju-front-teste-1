@@ -6,7 +6,7 @@ import { RoutesProps } from './types'
 
 const Router = ({ repository }: RoutesProps) => {
   return (
-    <div style={{ marginTop: 64 }}>
+    <main style={{ marginTop: 64 }}>
       <HashRouter>
         <Switch>
           <Route
@@ -25,7 +25,7 @@ const Router = ({ repository }: RoutesProps) => {
           </Route>
         </Switch>
       </HashRouter>
-    </div>
+    </main>
   )
 }
 

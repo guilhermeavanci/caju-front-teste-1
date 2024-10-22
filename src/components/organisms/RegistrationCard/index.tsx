@@ -89,6 +89,7 @@ const RegistrationCard = ({
           </>
         )}
         <ButtonSmallOutlined
+          aria-label='Remover'
           aria-disabled={registration.isLoading}
           disabled={registration.isLoading}
           $color={Color.ERROR}

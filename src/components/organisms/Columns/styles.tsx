@@ -16,10 +16,10 @@ export const Column = styled.div<{ $backgroundColor: any }>`
   background-color: ${({ $backgroundColor }) => $backgroundColor || '#FFF'};
 `
 
-export const TitleColumn = styled.h3<{ $color: any }>`
+export const TitleColumn = styled.h2<{ $color: any }>`
   margin: 0px;
   color: ${({ $color }) => $color || '#000'};
-  margin: 24px;
+  margin: 24px 24px 6px;
 `
 
 export const ColumContent = styled.div`
