@@ -184,6 +184,10 @@ Ferramenta de relátios de acessibilidade pós renderização do DOM. [Indicada 
 
 Projeto está organizado usando a [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) como estratégia de organização geral. Tem como seu principal pilar o [Domain Driven Design](https://martinfowler.com/bliki/DomainDrivenDesign.html), sendo assim, o projeto está estruturado em volta de suas entidades e casos de uso, proporcionando um desacoplamento das tecnologias usadas.
 
+
+![caju-test-architecture](https://github.com/user-attachments/assets/7f0db88b-3d54-411f-89c1-053aeecb13bb)
+
+
 > Mais sobre `Clean Architecture` na [documentação oficial](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) e em documentações auxiliares: [Descomplicando a Clean Architecture por Guilherme Biff Zarelli (Luizalabs)](https://medium.com/luizalabs/descomplicando-a-clean-architecture-cf4dfc4a1ac6) e [Clean Architecture With React por Ken Miyashita (Better Programming)](https://betterprogramming.pub/clean-architecture-with-react-cc097a08b105).
 
 > Vale notar que a camada de apresentação tem sua organização própria. Visite a sessão [Atomic Design](#atomic-design) para mais detalhes.
