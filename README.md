@@ -1,4 +1,3 @@
-
 # Caju Front End Teste
 
 Esse é um desafio técnico para você demonstrar suas habilidades como frontend, sua missão será dar continuidade ao desenvolvimento da plataforma de admissão que consiste em duas telas, a tela de `Dashboard` e uma tela de `Cadastro`.
@@ -20,25 +19,23 @@ A tela de `Cadastro` exibe um formulário simples que será utilizado para criar
 O desafio é aprimorar o código existente e implementar as funcionalidades que estão incompletas, use a sua experiência para identificar e propor soluções para os problemas encontrados.
 Sinta-se a vontade para refatorar, criar novas pastas, componentes, hooks, utils e o que mais achar necessário para garantir que o projeto esteja organizado e segue as boas práticas de desenvolvimento.
 
-
 ## Especificações
 
 ### Tela Dashboard
-  
+
 - Implementar `GET` ao carregar a pagina e ao fazer pequisa por `CPF`
 - Filtrar os cards por coluna, usando o status.
 - Implementar `PUT` ao clicar em Reprovar e alterar o status para `REPROVED`
 - Implementar `PUT` ao clicar em Aprovar e alterar o status para `APPROVED`
 - Implementar `PUT` ao clicar em Revisar novamente e alterar o status para `REVIEW`
 - Implementar `DELETE` ao clicar no lixeira no card.
-- O botão de `Reprovar` e `Aprovar` só deve aparecer em admissões com o status `REVIEW` 
+- O botão de `Reprovar` e `Aprovar` só deve aparecer em admissões com o status `REVIEW`
 - O botão `Revisar novamente` só deve aparecer em admissões com o status `REPROVED` ou `APPROVED`
 - Implementar um loading na tela ao realizar requisições.
 - Todas as ações devem ter modal de confirmação e uma notificação de sucesso ou erro
 - Na pesquisa por CPF realizar a requisição automaticamente ao preencher um CPF válido
 - Adicionar máscara de CPF no campo de pesquisa.
 - Atualizar os dados (refetch) ao clicar no ícone de atualizar
-
 
 ### Tela Cadastro
 
@@ -48,8 +45,8 @@ Sinta-se a vontade para refatorar, criar novas pastas, componentes, hooks, utils
 - Implementar `POST` ao preencher todos os campos corretamentes.
 - Redirecionar ao `/dashboard` ao criar uma nova admissão.
 
-
 ## API
+
 Você consumirá uma API mockada localmente, que será executada utilizando o json-server. Para mais informações consulte a [documentação](https://github.com/typicode/json-server/).
 
 Exemplo de Requisição:
@@ -70,11 +67,10 @@ Para realizar a pesquisa por CPF, utilize essa funcionalidade do json-web-server
 <br/>
 https://github.com/typicode/json-server/tree/v0?tab=readme-ov-file#filter
 
-
 ## Extras (opcional)
 
 - Testes Unitários e de Integração `(Obrigátorio para Senior e Tech Lead)`
-- End-to-End (E2E) 
+- End-to-End (E2E)
 - Configuração de CI/CD com deploy automatizado
 
 ## Dicas e sugestões
@@ -137,6 +133,136 @@ Caso necessite executar a suíte de testes use o comando abaixo:
 yarn test:dev
 ```
 
-
 Para concluir o desenvolvimento faça as edições necessárias e depois envie a URL do novo repositório com suas alterações para o RH.
 
+# Solução
+
+## Tests
+
+### Adição da dependência `@types/jest`
+
+Adicionado suporte para tipagem no Jest.
+
+## DevX
+
+### Adição do `.eslintcache` no `.gitignore`
+
+Esse arquivo de cache é montado mapeando o path para o repositório na máquina do desenvolvedor, ou seja, muda de um desenvolvedor para outro a depender de suas preferências. Portanto não faz sentido versionar esse arquivo. Além disso, evitar seu versionamento previne conflitos desnecessários.
+
+### Mudança na rule `import/no-unresolved`
+
+Rule `import/no-unresolved` no arquivo `.eslintrc.cjs` alterada para ignorar imports no padrão **"^~/"** dado que o arquivo `tsconfig.json` já faz o remapping desse formato.
+
+> Mais sobre `import/no-unresolved` na [documentação oficial](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-unresolved.md).
+
+### Adição da opção `allowSyntheticDefaultImports` no `tsconfig.json`
+
+Configuração do Typescript para aceitar imports no seguinte formato:
+
+    import React from "react"
+
+> Mais sobre `allowSyntheticDefaultImports` na [documentação oficial](https://www.typescriptlang.org/tsconfig/#allowSyntheticDefaultImports).
+
+### Adição de configurações para VSCode
+
+Pasta `.vscode` adicionada com 2 arquivos:
+
+- `settings.json` com `formatOnSave` e `prettier` como formatador padrão para arquivos Javascript, Typescript, etc.
+- `extensions.json` com sugestão de instalação das extenções para `eslint` e `prettier`.
+
+## Acessibilidade
+
+### Adição da dependência `@axe-core/react`
+
+Ferramenta de relátios de acessibilidade pós renderização do DOM. [Indicada na própria documentação](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y?tab=readme-ov-file#why) da dependência `eslint-plugin-jsx-a11y`, já usada no projeto como plugin de linter para acessibilidade.
+
+> Mais sobre `@axe-core/react` na [documentação oficial](https://github.com/dequelabs/axe-core-npm#readme).
+
+## Arquitetura
+
+### Clean Architecture
+
+Projeto está organizado usando a [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) como estratégia de organização geral. Tem como seu principal pilar o [Domain Driven Design](https://martinfowler.com/bliki/DomainDrivenDesign.html), sendo assim, o projeto está estruturado em volta de suas entidades e casos de uso, proporcionando um desacoplamento das tecnologias usadas.
+
+> Mais sobre `Clean Architecture` na [documentação oficial](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) e em documentações auxiliares: [Descomplicando a Clean Architecture por Guilherme Biff Zarelli (Luizalabs)](https://medium.com/luizalabs/descomplicando-a-clean-architecture-cf4dfc4a1ac6) e [Clean Architecture With React por Ken Miyashita (Better Programming)](https://betterprogramming.pub/clean-architecture-with-react-cc097a08b105).
+
+> Vale notar que a camada de apresentação tem sua organização própria. Visite a sessão [Atomic Design](#atomic-design) para mais detalhes.
+
+### Atomic Design
+
+Uso de [`Atomic Design`](https://atomicdesign.bradfrost.com/chapter-2/) como estratégia de organização da presentation layer.
+
+```mermaid
+graph TD;
+    %% Page
+    page(Page)-->template;
+    %% Template
+    template(Template)-->organism;
+    %% Organism
+    organism(Organism)-->atom;
+    organism-->molecule;
+    organism-->organism2(Organism);
+    %% Molecule
+    molecule(Molecule)-->atom(Atom);
+
+    click page "https://atomicdesign.bradfrost.com/chapter-2/#pages" _blank
+    click template "https://atomicdesign.bradfrost.com/chapter-2/#templates" _blank
+    click organism "https://atomicdesign.bradfrost.com/chapter-2/#organisms" _blank
+    click organism2 "https://atomicdesign.bradfrost.com/chapter-2/#organisms" _blank
+    click molecule "https://atomicdesign.bradfrost.com/chapter-2/#molecules" _blank
+    click atom "https://atomicdesign.bradfrost.com/chapter-2/#atoms" _blank
+```
+
+> Mais sobre `Atomic Design` na [documentação oficial](https://atomicdesign.bradfrost.com/chapter-2) ou clique no elemento desejado.
+
+### Camada de serviço
+
+#### Adição da dependência `@tanstack/react-query`
+
+Dependência para gerenciamento de fetching adicionada com o objetivo de tornar mais prática cada requisição para o `json-server`. Está sendo usada junto da `Fetch API`.
+
+> Mais sobre `@tanstack/react-query` na [documentação oficial](https://tanstack.com/query).
+
+> Mais sobre `Fetch API` na [documentação do MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+
+### Camada de apresentação (UI)
+
+#### Adicionado arquivo `theme.ts`
+
+Adicionado arquivo com todas as cores da aplicação para consistência e single source of truth.
+
+#### Refatoração dos botões
+
+Botões alterados para ter consistência na máquina de estado e fazer uso das cores do `theme.ts`.
+
+#### Adição da dependência `use-breakpoint`
+
+Adicionado custom hook para gerenciamento de responsividade.
+
+> Mais sobre `use-breakpoint` na [documentação oficial](https://github.com/iiroj/use-breakpoint#readme).
+
+#### Adição da dependência `react-loading-skeleton`
+
+Dependência com components de feedback de carregamento.
+
+> Mais sobre `react-loading-skeleton` na [documentação oficial](https://github.com/dvtng/react-loading-skeleton#readme).
+
+#### Adição da dependência `react-toastify`
+
+Dependência que permite o disparo de toasts para notificar o usuário.
+
+> Mais sobre `react-toastify` na [documentação oficial](https://fkhadra.github.io/react-toastify/).
+
+#### Adição da dependência `cpf-cnpj-validator`
+
+Dependência para validação de CPF.
+
+> Mais sobre `cpf-cnpj-validator` na [documentação oficial](https://github.com/carvalhoviniciusluiz/cpf-cnpj-validator#readme).
+
+#### Adição das dependências `formik` e `yup`
+
+Dependências para gerenciamento e validação de formulários.
+
+> Mais sobre `formik` na [documentação oficial](https://formik.org/docs/overview).
+
+> Mais sobre `yup` na [documentação oficial](https://github.com/jquense/yup#readme).
